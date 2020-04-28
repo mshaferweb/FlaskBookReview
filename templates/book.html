@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Book Review
+{% endblock %}
+
+{% block body %}
+<div class="logout">   User: {{ session['user_id'] }}  <a id="logout" href="{{url_for('logout')}}"> Logout</a> </div>
+
+
+        <div>
+            <ul>
+                    <li>{{ book.title }} by {{book.author}} </li>
+                    <li>Published year: {{ book.year }} </li>
+                    <li>isbn: <a href="/books/{{ book.isbn }}">{{ book.isbn }} </a></li>
+            </ul>
+        </div>
+        <div>
+        <form action="/review" method="post">
+            <input type="hidden" name=username value="{{ session['user_id'] }}">
+            <input type="hidden" name="isbn" value="{{ book.isbn }}">
+
+
+            <textarea id="review" rows = "5" cols = "60" name = "review" placeholder="Enter review here..."></textarea><br>
+            Rating: <input id="rating" maxlength="4" size="4" type="number" name="rating" placeholder="1 - 5"><input id="submit_review" type = "submit" value="Submit review">
+        </form>
+
+
+</div>
+<div>
+          <ul>
+                {% for ireview in ireviews %}
+                    <li>Rating: {{ ireview.rating }} Review: {{ireview.review}} </li>
+                {% endfor %}
+        </ul>
+</div>
+<div>
+    Good Reads Average Rating: {{ good_reads.average_rating }} Ratings count {{good_reads.ratings_count}}
+</div>
+{% endblock %}

@@ -1,0 +1,4 @@
+.idea/
+flask_session/
+login_tests/__pycache__/
+__pycache__/

@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Search Books
+{% endblock %}
+
+{% block body %}
+<div class="logout">   User: {{ session['user_id'] }}  <a id="logout" href="{{url_for('logout')}}"> Logout</a> </div>
+    <div>
+        {% if logged_in %}
+
+
+        <form action="{{ url_for('books') }}" method="post">
+            <input id="books" type="text" onfocus="this.value=''" name="bookname" value="Book Name, Author or ISBN">
+            <button id="search_books">Search</button>
+        </form>
+        {% endif %}
+
+        {% if books %}
+
+
+            <ul>
+                {% for book in books %}
+                    <li>{{ book.title }} by {{book.author}} isbn: <a href="/books/{{ book.isbn }}">{{ book.isbn }}</a></li>
+                {% endfor %}
+        </ul>
+
+        {% endif %}
+    </div>
+
+{% endblock %}

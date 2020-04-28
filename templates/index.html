@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Book Review Project 1
+{% endblock %}
+
+{% block body %}
+
+    {% if not logged_in %}
+
+<!-- LOGIN script attribution: https://codepen.io/colorlib/pen/rxddKy  -->
+
+<div class="login-page">
+  <div class="form">
+    <form class="register-form" action="{{ url_for('register') }}" method="post">
+      <input id="rusername" type="text" name="name" placeholder="username"/>
+      <input id="rpassword" type="password" name="password" placeholder="password"/>
+      <button id="create">create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+    <form class="login-form" action="{{ url_for('login') }}" method="post">
+      <input id="lusername" type="text" name="name" placeholder="username"/>
+      <input id="lpassword" type="password" name="password" placeholder="password"/>
+      <button id="login_button">login</button>
+      <p class="message">Not registered? <a id="switch" href="#">Create an account</a></p>
+    </form>
+  </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script id="rendered-js">
+
+$('.message a').click(function () {
+  $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+});
+</script>
+
+    {% endif %}
+
+    <div>
+        {% if logged_in %}
+            yay {{ session['user_id'] }}
+        {% endif %}
+    </div>
+
+{% endblock %}

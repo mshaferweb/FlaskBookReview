@@ -1,0 +1,5 @@
+selenium
+robotframework-seleniumlibrary
+robotframework
+docutils
+robotframework-requests
